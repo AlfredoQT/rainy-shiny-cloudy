@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -17,15 +18,39 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var currentWeatherLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    var currentWeather = CurrentWeather()
+    var currentWeather: CurrentWeather!
+    var forecasts = [Forecast]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        currentWeather = CurrentWeather()
         currentWeather.downloadWeatherDetails {
-            //Setup UI to downloaded data when completed download
-            self.updateMainUI()
+            //Setup UI to downloaded data when completed download of both current and forecast
+            self.downloadForecastWeatherData {
+                self.updateMainUI()
+            }
+        }
+    }
+    
+    func downloadForecastWeatherData(completed: @escaping DownloadComplete){
+        let forecastURL = URL(string: FORECAST_URL)
+        Alamofire.request(forecastURL!).responseJSON { response in
+            let result = response.result
+            if let dict = result.value as? Dictionary<String, Any> {
+                if let list = dict["list"] as? [Dictionary<String, Any>] {
+                    for obj in list {
+                        let forecast = Forecast(weatherDict: obj)
+                        self.forecasts.append(forecast)
+                    }
+                    //Remove the first day since we already have it
+                    self.forecasts.remove(at: 0)
+                    //Reload table view data after loading forecasts
+                    self.tableView.reloadData()
+                }
+            }
+            completed()
         }
     }
     
@@ -35,13 +60,19 @@ class WeatherVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return forecasts.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell", for: indexPath)
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell", for: indexPath) as? WeatherCell {
+            let forecast = forecasts[indexPath.row]
+            cell.configureCell(forecast: forecast)
+            return cell
+        }
+        else {
+            return WeatherCell()
+        }
     }
     
     func updateMainUI(){

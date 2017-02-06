@@ -16,6 +16,7 @@
 		AB80F5991E46D88D001DA516 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB80F5981E46D88D001DA516 /* Assets.xcassets */; };
 		AB80F59C1E46D88D001DA516 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB80F59A1E46D88D001DA516 /* LaunchScreen.storyboard */; };
 		AB95D9111E47DD2100682BED /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB95D9101E47DD2100682BED /* Forecast.swift */; };
+		ABDB79E11E4801F900CB5604 /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDB79E01E4801F900CB5604 /* WeatherCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		AB80F59B1E46D88D001DA516 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AB80F59D1E46D88D001DA516 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB95D9101E47DD2100682BED /* Forecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
+		ABDB79E01E4801F900CB5604 /* WeatherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 				AB4F77531E47B3DC00BD01B5 /* Constants.swift */,
 				AB4F77551E47B64000BD01B5 /* CurrentWeather.swift */,
 				AB95D9101E47DD2100682BED /* Forecast.swift */,
+				ABDB79E01E4801F900CB5604 /* WeatherCell.swift */,
 			);
 			path = RainyShinyCloudy;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				AB80F5921E46D88D001DA516 /* AppDelegate.swift in Sources */,
 				AB4F77561E47B64000BD01B5 /* CurrentWeather.swift in Sources */,
 				AB4F77541E47B3DC00BD01B5 /* Constants.swift in Sources */,
+				ABDB79E11E4801F900CB5604 /* WeatherCell.swift in Sources */,
 				AB95D9111E47DD2100682BED /* Forecast.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
